@@ -4,7 +4,7 @@ import os, sys
 
 # Custom Modules
 from lexicaltoken import Token
-
+from errorhandler import LexicalError
 
 # Constants
 LOWERCASELETTERS = "abcdefghijklmnopqrstuvwxyz"
@@ -32,8 +32,11 @@ KEYWORDS = {
     "null":    "T#NULL",
     "this":    "T#THIS",
     "class":   "T#CLASS",
-    "System.out.Println": "T#PRINT",
-    "System.in.Read": "T#READ"
+    "System":  "T#SYSTEM",
+    "out":     "T#OUT",
+    "in":      "T#IN",
+    "println": "T#PRINT",
+    "read":    "T#READ"
 }
 
 PUNCTUATION = {
@@ -75,7 +78,6 @@ ARITHMETIC_OPERATORS = {
 # [INCODE]: "T#NEGATIVE_INTEGER"
 # [INCODE]: "T#NEGATIVE_FLOAT"
 # [INCODE]: "T#IDENTIFIER"
-# [INCODE]: "T#ATTRIBUTION"
 # [INCODE]: "T#ERROR"
 
 class LexicalAnalyzer(object):
@@ -285,9 +287,10 @@ class LexicalAnalyzer(object):
                     self.column += 1
 
                 else:
-                    _type = "T#ERROR"
-                    self.tokens.append(Token(_type, char, self.line, self.column))
-                    self.column += 1
+                    #_type = "T#ERROR"
+                    #self.tokens.append(Token(_type, char, self.line, self.column))
+                    #self.column += 1
+                    raise LexicalError("Lexical Error", self.line, self.column)
 
             else:
                 # END OF FILE
@@ -299,11 +302,11 @@ class LexicalAnalyzer(object):
 if(__name__ == "__main__"):
     if(len(sys.argv) == 2):
         if(os.path.isfile(sys.argv[1])):
-            lex = LexicalAnalyzer(sys.argv[1])
+            lex = LexicalAnalyzer() 
 
             print("Número de tokens: " + str(len(lex.tokens)))
             
-            for token in lex.tokens:
+            for token in lex.tokenize(sys.argv[1]):
                 if(token.type != "T#ERROR"):
                     print("Encontrado o token \"{0}\" com lexema \"{1}\" na linha {2} coluna {3}".format(token.type, token.lexem, token.line, token.column))
                 else:
