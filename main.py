@@ -2,26 +2,25 @@
 #  MINIJAVA COMPILER IN PYTHON
 ################################
 
-
-# Native Modules
-import os, sys
-# Downloaded Modules
-
-# Custom Modules
-from lexicalanalyzer import LexicalAnalyzer
-from parser import PrimitiveRecursiveParser
-from semanticanalyzer import SemanticAnalyzer
-from codegenerator import CodeGenerator
-
-
 if(__name__ == "__main__"):
+    # Native Modules
+    import os, sys
+    # Downloaded Modules
+
+    # Custom Modules
+    from lexicalanalyzer import LexicalAnalyzer
+    from parser import PRP
+    from semanticanalyzer import SemanticAnalyzer
+    from codegenerator import CodeGenerator
+
+
     symboltable = []
     if(len(sys.argv) == 2):
         if(os.path.isfile(sys.argv[1])):
             lexer = LexicalAnalyzer()
             tokenlist = lexer.tokenize()
 
-            parser = PrimitiveRecursiveParser(tokenlist)
+            parser = PRP(tokenlist)
             symboltable = parser.parse()
 
             validator = SemanticAnalyzer()

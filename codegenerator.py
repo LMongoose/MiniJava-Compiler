@@ -7,7 +7,7 @@ from errorhandler import ExecutionError
 import main
 
 
-class CodeGenerator(object):
+class CodeGenerator():
     def __init__(self):
         self.targetfilename = ""
 
@@ -29,12 +29,15 @@ class CodeGenerator(object):
             if(p_tokenlist[_currpos].type == "T#CLASS"):
                 outputfile.write("{0} {1} {2}\n".format("class", p_tokenlist[_currpos+1].lexem, ":"))
                 _currpos += 2
+
             elif(p_tokenlist[_currpos].type == "T#LEFT_BRACKET"):
                 _tabcount += 1
                 _currpos += 1
+
             elif(p_tokenlist[_currpos].type == "T#RIGHT_BRACKET"):
                 _tabcount -= 1
                 _currpos += 1
+
             elif(p_tokenlist[_currpos].type == "T#PUBLIC"):
                 if(p_tokenlist[_currpos+1].type == "T#STATIC"):
                     if(p_tokenlist[_currpos+2].type == "T#VOID"):
@@ -42,17 +45,18 @@ class CodeGenerator(object):
                             outputfile.write("\t"*_tabcount+"@staticmethod\n")
                             outputfile.write("\t"*_tabcount+"def main():\n")
                             _currpos += 4
+
             elif(p_tokenlist[_currpos].type == "T#SYSTEM"):
                 if(p_tokenlist[_currpos].type == "T#DOT"):
                     if(p_tokenlist[_currpos].type == "T#OUT"):
                         if(p_tokenlist[_currpos].type == "T#DOT"):
                             if(p_tokenlist[_currpos].type == "T#PRINT"):
                                 outputfile.write("\t"*_tabcount+"print("+p_tokenlist[_currpos+6].value+")\n")
+
             elif((p_tokenlist[_currpos].type == "T#TYPE_BOOLEAN") or (p_tokenlist[_currpos].type == "T#TYPE_INTEGER")):
                 outputfile.write("\t"*_tabcount+p_tokenlist[_currpos+1].lexem + "="+ p_tokenlist[_currpos+2].lexem+"\n")
             outputfile.write("if(__name__ == \"__main__\"):\n")
             outputfile.write("\t"+p_tokenlist[1].lexem +".main()")
-            
 
     def run(self):
         # call py <generated_code>
@@ -66,5 +70,4 @@ class CodeGenerator(object):
 
 
 if(__name__ == "__main__"):
-    codegen = CodeGenerator()
-    codegen.run()
+    pass

@@ -7,19 +7,19 @@ from errorhandler import SemanticError
 import main
 
 
-class SemanticAnalyzer(object):
+class SemanticAnalyzer():
     def __init__(self):
         pass
 
     def addTokenToTable(self, p_token):
-        # TODO: duplicity: check if have another declared with same name
+        # TODO: check if have another declared with same name and scope
         if(not(p_token) in main.symboltable):
             main.symboltable.append(p_token)
         else:
             raise SemanticError("Token is already on symboltable", p_token.line, p_token.column)
 
     def validateIdentifier(self):
-        # not declared: check if identifier exists
+        # TODO: check if identifier exists
         pass
 
     def validateTypeCompatibility(self, p_expressionlist):
@@ -28,7 +28,7 @@ class SemanticAnalyzer(object):
                 raise SemanticError("The elements of the expression are not of the same type", p_expressionlist[0].line, p_expressionlist[0].column)
 
     def analyze(self):
-        # TODO: checking of commands, procedure/function callings, operations
+        # TODO: check commands, procedure/function callings, operations, comparations, etc.
         pass
 
 if(__name__ == "__main__"):

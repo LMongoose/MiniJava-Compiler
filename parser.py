@@ -9,7 +9,7 @@ from semanticanalyzer import SemanticAnalyzer
 from errorhandler import SyntaxParsingError
 import main
 
-class Parser(object):
+class Parser():
     def __init__(self, p_tokenlist):
         self.tokens = p_tokenlist
         self.token = None
@@ -30,7 +30,7 @@ class Parser(object):
         self.token = self.tokens[self.lastpos]
 
 
-class PrimitiveRecursiveParser(Parser):
+class PRP(Parser):
     def __init__(self, p_tokenlist):
         Parser.__init__(self, p_tokenlist)
 
@@ -42,7 +42,7 @@ class PrimitiveRecursiveParser(Parser):
         if(self.token.type == "T#CLASS"):
             self.searchToken()
             if(self.token.type == "T#IDENTIFIER"):
-                ## TODO: add to symboltable
+                ## TODO: add to symboltable (main class identifier)
                 self.searchToken()
                 if(self.token.type == "T#LEFT_BRACKET"):
                     self.validateMain()
@@ -72,7 +72,7 @@ class PrimitiveRecursiveParser(Parser):
                                     if(self.token.type == "T#RIGHT_SQUARE_BRACKET"):
                                         self.searchToken()
                                         if(self.token.type == "T#IDENTIFIER"):
-                                            ## TODO: add to symboltable
+                                            ## TODO: add to symboltable (main identifier)
                                             self.searchToken()
                                             if(self.token.type == "T#RIGHT_PARENTHESIS"):
                                                 self.searchToken()
@@ -119,7 +119,9 @@ class PrimitiveRecursiveParser(Parser):
     def validateAttribution(self):
         self.searchToken()
         if(self.token.type == "T#IDENTIFIER"):
-            ## TODO: add/search in symboltable (add if is new variable and search if is only attribution)
+            ## TODO: 
+            #   add/search in symboltable (add if is new variable and search if is only attribution)
+            #   add value, address and datatype to token
             self.searchToken()
             if(self.token.type == "T#ATTRIBUTION"):
                 self.searchToken()
@@ -211,21 +213,21 @@ class PrimitiveRecursiveParser(Parser):
 
 
 if(__name__ == "__main__"):
-    def printSymbolTable(p_parser):
-        print()
-        print("Symbol Table:")
-        print("TOKENTYPE, TOKENLEXEM, TOKENSCOPE")
-        for data in p_parser.symboltable:
-            print(data.type +", "+ data.lexem + ", " + data.scope)
+    #def printSymbolTable(p_parser):
+    #    print()
+    #    print("Symbol Table:")
+    #    print("TOKENTYPE, TOKENLEXEM, TOKENSCOPE")
+    #    for data in p_parser.symboltable:
+    #        print(data.type +", "+ data.lexem + ", " + data.scope)
 
     try:
         table = []
         lexer = LexicalAnalyzer()
         tokenlist = lexer.tokenize(sys.argv[1])
-        parser = PrimitiveRecursiveParser(tokenlist, table)
+        parser = PRP(tokenlist)
         parser.parse()
         print(sys.argv[1] + " is a valid program.")
-        printSymbolTable(parser)
+        #printSymbolTable(parser)
     except IndexError:
         print("Missing target source file.")
         print("Usage:")

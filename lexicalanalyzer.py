@@ -80,7 +80,7 @@ ARITHMETIC_OPERATORS = {
 # [INCODE]: "T#IDENTIFIER"
 # [INCODE]: "T#ERROR"
 
-class LexicalAnalyzer(object):
+class LexicalAnalyzer():
     def __init__(self):
         self.line = 1
         self.column = 1
