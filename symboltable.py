@@ -5,10 +5,13 @@ class Symbol():
         self.datatype = p_datatype
         self.scope = p_scope
 
-# deprecated
+
 class SymbolTable(dict):
+    def __init__(self):
+        super().__init__()
+
     def allocate(self, p_key):
-        if(not(p_key in self.keys())):
+        if(not(self.lookup(p_key))):
             self.insert(p_key, {})
 
     def free(self):
@@ -16,16 +19,16 @@ class SymbolTable(dict):
 
     def lookup(self, p_key):
         if(p_key in self.keys()):
-            return self[p_key]
+            return True
         else:
-            return None
+            return False
 
     def insert(self, p_key, p_value):
-        if(not(p_key in self.keys())):
+        if(not(self.lookup(p_key))):
             self[p_key] = p_value
 
-    def set_attribute(self, p_key):
-        self[p_key] = None
+    def set_attribute(self, p_key, p_value):
+        self[p_key] = p_value
 
     def get_attribute(self, p_key):
         return self.get(p_key)

@@ -9,7 +9,7 @@ if(__name__ == "__main__"):
 
     # Custom Modules
     from lexicalanalyzer import LexicalAnalyzer
-    from parser import PRP
+    from syntaxparser import PRP
     from semanticanalyzer import SemanticAnalyzer
     from codegenerator import CodeGenerator
 
@@ -18,10 +18,10 @@ if(__name__ == "__main__"):
     if(len(sys.argv) == 2):
         if(os.path.isfile(sys.argv[1])):
             lexer = LexicalAnalyzer()
-            tokenlist = lexer.tokenize()
+            tokenlist = lexer.tokenize(sys.argv[1])
 
-            parser = PRP(tokenlist)
-            symboltable = parser.parse()
+            parser = PRP()
+            parser.parse(tokenlist)
 
             validator = SemanticAnalyzer()
             #validator.analyze()

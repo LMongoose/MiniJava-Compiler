@@ -4,7 +4,7 @@ class Token():
         self.lexem = p_lexem
         self.line = p_line
         self.column = p_column
+        self.address = "" ## position in symboltable
         self.datatype = "" ## boolean/integer
         self.scope = "" ## global/function/procedure
         self.value = ""
-        self.address = ""
