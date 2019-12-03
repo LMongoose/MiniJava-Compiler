@@ -9,6 +9,7 @@ from semanticanalyzer import SemanticAnalyzer
 from errorhandler import SyntaxParsingError
 import main
 
+
 class Parser():
     def __init__(self):
         self.tokens = []

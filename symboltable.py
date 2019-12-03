@@ -1,3 +1,4 @@
+# deprecated
 class Symbol():
     def __init__(self, p_name, p_type, p_datatype, p_scope):
         self.name = p_name

@@ -6,6 +6,7 @@ import os, sys
 from lexicaltoken import Token
 from errorhandler import LexicalError
 
+
 # Constants
 LOWERCASELETTERS = "abcdefghijklmnopqrstuvwxyz"
 UPPERCASECASELETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -79,6 +80,7 @@ ARITHMETIC_OPERATORS = {
 # [INCODE]: "T#NEGATIVE_FLOAT"
 # [INCODE]: "T#IDENTIFIER"
 # [INCODE]: "T#ERROR"
+
 
 class LexicalAnalyzer():
     def __init__(self):
