@@ -1,8 +1,10 @@
 # MiniJava-Compiler
 
 * Modo de usar:
+
 fazer o download do repositório em alguma pasta, abrir ela no cmd e digitar:
-  python main.py programa.java
+  
+python main.py programa.java
 
 * Arquivos:
 
