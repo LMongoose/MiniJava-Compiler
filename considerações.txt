@@ -1,0 +1,2 @@
+não deu tempo de implementar a tabela de símbolos pois não sabíamos como implementar com Hashmap
+por isso não deu tempo de terminar a análise semântica nem a geração de código que necessitava da tabela de símbolos
