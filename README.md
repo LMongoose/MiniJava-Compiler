@@ -14,7 +14,7 @@ syntaxparser.py -> analisador sintático
 
 semanticanalyzer.py -> analisador semântico
 
-symboltable.py -> tabela de símbolos (não mais utilizada)
+symboltable.py -> tabela de símbolos
 
 codegenerator.py -> gerador de código
 
